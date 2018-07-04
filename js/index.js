@@ -1,6 +1,8 @@
 const height = 700;
 const width = 900;
 
+const title = d3.select("body").append('h1').attr('id', 'title').text("U.S. Education Data by County");
+
 const svg = d3.select("body").append("svg")
   .attr("width", width)
   .attr("height", height)
