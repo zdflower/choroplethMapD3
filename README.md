@@ -6,8 +6,8 @@ Free Code Camp Project
 https://learn.freecodecamp.org/data-visualization/data-visualization-projects/visualize-data-with-a-choropleth-map
 
 ## User stories
-- [ ] #1: My choropleth should have a title with a corresponding id="title".
-- [ ] #2: My choropleth should have a description element with a corresponding id="description".
+- [x] #1: My choropleth should have a title with a corresponding id="title".
+- [x] #2: My choropleth should have a description element with a corresponding id="description".
 - [x] #3: My choropleth should have counties with a corresponding class="county" that represent the data.
 - [ ] #4: There should be at least 4 different fill colors used for the counties.
 - [ ] #5: My counties should each have data-fips and data-education properties containing their corresponding fips and education values.
