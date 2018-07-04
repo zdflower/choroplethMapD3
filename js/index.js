@@ -1,13 +1,16 @@
-const height = 700;
-const width = 900;
+const HEIGHT = 700;
+const WIDTH = 900;
+const BASE_DATA_URL = "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/";
+const COUNTIES_URL = BASE_DATA_URL + "counties.json";
+const EDU_DATA_URL = BASE_DATA_URL + "for_user_education.json";
 
 const title = d3.select("body").append('h1').attr('id', 'title').text("U.S. Education Data by County");
 
 const description = d3.select('body').append('p').attr('id', 'description').text("Percentage of adults (age 25+) with a bachelor's degree or higher (2010-2014)");
 
 const svg = d3.select("body").append("svg")
-  .attr("width", width)
-  .attr("height", height)
+  .attr("width", WIDTH)
+  .attr("height", HEIGHT)
   .append("g")
   .attr("transform", "translate(0,0)");
 
@@ -16,8 +19,8 @@ const svg = d3.select("body").append("svg")
 // https://bl.ocks.org/mbostock/4060606
 
 d3.queue()
-  .defer(d3.json, "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json")
-  .defer(d3.json, "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json")
+  .defer(d3.json, COUNTIES_URL)
+  .defer(d3.json, EDU_DATA_URL)
   .await(ready);
 
 var path = d3.geoPath();
