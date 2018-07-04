@@ -31,7 +31,8 @@ function readyCounties(counties) {
       .data(topojson.feature(counties, counties.objects.counties).features)
         .enter().append("path")
         .attr("fill", "red")
-        .attr("d", path)  
+        .attr("d", path)
+        .attr("class", "county")
 }
 
 function readyEduData(eduData){
