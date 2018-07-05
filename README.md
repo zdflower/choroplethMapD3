@@ -21,3 +21,17 @@ https://learn.freecodecamp.org/data-visualization/data-visualization-projects/vi
 ### Datasets
 - US Education Data: https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json
 - US County Data: https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json
+
+The education data has the form:
+
+    [
+	    {
+        "fips": 1001,
+        "state": "AL",
+        "area_name": "Autauga County",
+        "bachelorsOrHigher": 21.9
+       },
+      ...
+    ]
+
+FIPS are Federal Information Processing Standards codes.
