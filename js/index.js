@@ -28,23 +28,16 @@ var path = d3.geoPath();
 
 function ready(error, counties, eduData) {
   if (error) throw error;
-  readyCounties(counties);
-  readyEduData(eduData);
-}
-
-function readyCounties(counties) {
-    svg.append("g")
-      .attr("class", "counties")
-      .selectAll("path")
-      .data(topojson.feature(counties, counties.objects.counties).features)
-        .enter().append("path")
+  svg.append("g")
+    .attr("class", "counties")
+    .selectAll("path")
+    .data(topojson.feature(counties, counties.objects.counties).features)
+      .enter().append("path")
         .attr("fill", (d, i) => chooseAColour())
         .attr("d", path)
         .attr("class", "county")
-}
-
-function readyEduData(eduData){
-  // 
+        .attr("data-fips", (d) => d.id)
+        .attr("data-education", (d) => getEduData(eduData, d.id))
 }
 
 function chooseAColour(){
@@ -57,6 +50,10 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function getEduData(eduData, fips){
+  const result = eduData.find((d) => d.fips === fips);
+  return result.bachelorsOrHigher;
+}
 
 // Así, para cada valor elige un color:
 //      .attr("fill", (d, i) => chooseAColour())
