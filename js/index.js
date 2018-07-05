@@ -3,6 +3,7 @@ const WIDTH = 900;
 const BASE_DATA_URL = "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/";
 const COUNTIES_URL = BASE_DATA_URL + "counties.json";
 const EDU_DATA_URL = BASE_DATA_URL + "for_user_education.json";
+const COLOURS = ['red', 'green', 'blue', 'yellow', 'purple', 'lime'];
 
 const title = d3.select("body").append('h1').attr('id', 'title').text("U.S. Education Data by County");
 
@@ -37,7 +38,7 @@ function readyCounties(counties) {
       .selectAll("path")
       .data(topojson.feature(counties, counties.objects.counties).features)
         .enter().append("path")
-        .attr("fill", "red")
+        .attr("fill", (d, i) => chooseAColour())
         .attr("d", path)
         .attr("class", "county")
 }
@@ -45,3 +46,20 @@ function readyCounties(counties) {
 function readyEduData(eduData){
   // 
 }
+
+function chooseAColour(){
+  let i = getRandomInt(0, COLOURS.length);
+  return COLOURS[i];
+}
+
+// https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Math/random
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
+// Así, para cada valor elige un color:
+//      .attr("fill", (d, i) => chooseAColour())
+
+// Así, es el mismo color para todos:
+//      .attr("fill", chooseAColour())
