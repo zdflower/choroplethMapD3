@@ -37,3 +37,11 @@ The education data has the form:
 FIPS are Federal Information Processing Standards codes.
 
 The id in the counties data corresponds to the fips in the education data.
+
+The tooltip properties are its attributes.
+
+## Resources
+- https://github.com/d3/d3-queue
+- http://giscollective.org/d3-queue-js/
+- https://bl.ocks.org/mbostock/4060606
+- http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
