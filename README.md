@@ -13,8 +13,8 @@ https://learn.freecodecamp.org/data-visualization/data-visualization-projects/vi
 - [x] #5: My counties should each have data-fips and data-education properties containing their corresponding fips and education values.
 - [x] #6: My choropleth should have a county for each provided data point.
 - [x] #7: The counties should have data-fips and data-education values that match the sample data.
-- [ ] #8: My choropleth should have a legend with a corresponding id="legend".
-- [ ] #9: There should be at least 4 different fill colors used for the legend.
+- [x] #8: My choropleth should have a legend with a corresponding id="legend".
+- [x] #9: There should be at least 4 different fill colors used for the legend.
 - [x] #10: I can mouse over an area and see a tooltip with a corresponding id="tooltip" which displays more information about the area.
 - [x] #11: My tooltip should have a data-education property that corresponds to the data-education of the active area.
 
@@ -41,6 +41,9 @@ The id in the counties data corresponds to the fips in the education data.
 The tooltip properties are its attributes.
 
 I used the map datastructure to structure the education data into key:value pairs of fips:bachelorsOrHigher, so to access it in a simpler way.
+
+### To improve
+It was hard to produce the legend, and it is very far from a good one.
 
 ## Resources
 - https://github.com/d3/d3-queue
