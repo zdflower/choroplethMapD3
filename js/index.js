@@ -1,6 +1,5 @@
 // TO DO:
-// Define a mapping between colours and range of education to assign a colour to each county.
-// Add a legend.
+// Learn how to do a proper legend.
 
 var HEIGHT = 700;
 var WIDTH = 900;
@@ -8,8 +7,9 @@ var BASE_DATA_URL = "https://raw.githubusercontent.com/no-stack-dub-sack/testabl
 var COUNTIES_URL = BASE_DATA_URL + "counties.json";
 var EDU_DATA_URL = BASE_DATA_URL + "for_user_education.json";
 
-var COLOURS = ['rgb(247, 100, 100)', 'rgb(200, 100, 100)', 'rgb(150, 100, 100)', 'rgb(100, 100, 100)']; //['red', 'green', 'blue', 'yellow', 'purple', 'lime'];
+var COLOURS = ['rgb(247, 100, 100)', 'rgb(200, 100, 100)', 'rgb(150, 100, 100)', 'rgb(100, 100, 100)'];
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 var eduMap = new Map();
 
 // https://codepen.io/zdflower/pen/RyPQKy
@@ -32,8 +32,7 @@ var path = d3.geoPath();
 
 function ready(error, counties, eduData) {
   if (error) throw error;
-  procesarEduData(eduData); // recorre eduData y toma fips y bachelorsOrHigher y agrega pares fips:bachelorsOrHigher al mapa eduMap, previamente declarado arriba.
-  //console.error(eduMap);
+  procesarEduData(eduData);
   svg.append("g").attr("class", "counties").attr("transform", "translate(20,50)").selectAll("path").data(topojson.feature(counties, counties.objects.counties).features).enter().append("path").attr("fill", function (d, i) {
     return chooseAColour(eduMap.get(d.id));
   }).attr("d", path).attr("class", "county").attr("data-fips", function (d) {
@@ -54,10 +53,8 @@ function ready(error, counties, eduData) {
 // TO DO: try not to repeat code --^
 // **IMPORTANT*** : Is there a way to avoid repeating eduMap.get(d.id)?
 
-
-/* Legend */
-
-// End of legend
+/* Add the Legend */
+leyenda();
 
 function procesarEduData(data) {
   data.forEach(function (d) {
@@ -76,4 +73,21 @@ function chooseAColour(education) {
     i = 3;
   }
   return COLOURS[i];
+}
+
+function leyenda() {
+
+  var legendScale = d3.scaleLinear().domain([0, 100]).range([0, 100]);
+
+  var legend = svg.append("g").attr("id", "legend").attr("transform", "translate(" + 420 + "," + 20 + ")");
+
+  // colour rectangles
+  legend.selectAll("rect").data(COLOURS).enter().append("rect").attr("fill", function (d) {
+    return d;
+  }).attr("stroke", "black").attr("stroke-width", "1px").attr("width", 30).attr("height", 20).attr("x", function (d, i) {
+    return i * 30;
+  }).attr("y", 0);
+
+  // axis
+  legend.append("g").attr("transform", "translate(" + 0 + "," + 20 + ")").attr("id", "legend-axis").call(d3.axisBottom(legendScale).tickValues([25, 50, 75, 100]));
 }
