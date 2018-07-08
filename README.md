@@ -42,8 +42,10 @@ The tooltip properties are its attributes.
 
 I used the map datastructure to structure the education data into key:value pairs of fips:bachelorsOrHigher, so to access it in a simpler way.
 
+The range for the legend scale (a linear scale) corresponds to the width of the coloured rectangles group. The domain corresponds to the minimum and maximum possible values of the data, in this case, from 0% to 100%.
+
 ### To improve
-It was hard to produce the legend, and it is very far from a good one.
+It was hard to produce the legend, and could be much better.
 
 ## Resources
 - https://github.com/d3/d3-queue
