@@ -53,3 +53,5 @@ It was hard to produce the legend, and could be much better.
 - https://bl.ocks.org/mbostock/4060606
 - http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+- https://learn.freecodecamp.org/data-visualization/data-visualization-with-d3/
+- https://github.com/d3/d3-scale
