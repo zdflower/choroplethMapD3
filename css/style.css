@@ -1,9 +1,9 @@
 /* https://codepen.io/zdflower/pen/RyPQKy */
 #tooltip {
   position: absolute;           
-  text-align: left;           
-  width: 40px;                  
-  height:20px;                 
+  text-align: center;           
+  width: 80px;                  
+  height:50px;                 
   padding: 10px;             
   font: 12px sans-serif;        
   background: beige;
@@ -13,18 +13,4 @@
   border-radius: 8px;           
   pointer-events: none;
   z-index: 2;
-}
-
-.q0-4 {
-  fill: rgb(247, 100, 100);
-}
-.q1-4 {
-  fill: rgb(200, 100, 100);
-}
-
-.q2-4 {
-  fill: rgb(150, 100, 100);
-}
-.q3-4 {
-  fill: rgb(100, 100, 100);
 }

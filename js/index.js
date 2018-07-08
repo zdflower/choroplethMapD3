@@ -1,6 +1,3 @@
-// TO DO:
-// Learn how to do a proper legend.
-
 var HEIGHT = 700;
 var WIDTH = 900;
 var BASE_DATA_URL = "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/";
@@ -34,15 +31,15 @@ function ready(error, counties, eduData) {
   if (error) throw error;
   procesarEduData(eduData);
   svg.append("g").attr("class", "counties").attr("transform", "translate(20,50)").selectAll("path").data(topojson.feature(counties, counties.objects.counties).features).enter().append("path").attr("fill", function (d, i) {
-    return chooseAColour(eduMap.get(d.id));
+    return chooseAColour(eduMap.get(d.id).education);
   }).attr("d", path).attr("class", "county").attr("data-fips", function (d) {
     return d.id;
   }).attr("data-education", function (d) {
-    return eduMap.get(d.id);
+    return eduMap.get(d.id).education;
   }).on('mouseover', function (d) {
     var education = eduMap.get(d.id);
     tooltip.transition().duration(100).style("opacity", 0.9);
-    tooltip.html(education + "%");
+    tooltip.html(education.education + "% \n " + education.areaName);
     tooltip.style("left", d3.event.pageX + "px").style("top", d3.event.pageY - 28 + "px");
     tooltip.attr("data-fips", d.id).attr("data-education", education);
   }).on('mouseout', function () {
@@ -58,7 +55,7 @@ leyenda();
 
 function procesarEduData(data) {
   data.forEach(function (d) {
-    eduMap.set(d.fips, d.bachelorsOrHigher);
+    eduMap.set(d.fips, { "education": d.bachelorsOrHigher, "areaName": d.area_name });
   });
 }
 
@@ -77,7 +74,7 @@ function chooseAColour(education) {
 
 function leyenda() {
 
-  var legendScale = d3.scaleLinear().domain([0, 100]).range([0, 100]);
+  var legendScale = d3.scaleLinear().domain([0, 100]).range([0, 120]);
 
   var legend = svg.append("g").attr("id", "legend").attr("transform", "translate(" + 420 + "," + 20 + ")");
 
@@ -89,5 +86,7 @@ function leyenda() {
   }).attr("y", 0);
 
   // axis
-  legend.append("g").attr("transform", "translate(" + 0 + "," + 20 + ")").attr("id", "legend-axis").call(d3.axisBottom(legendScale).tickValues([25, 50, 75, 100]));
+  legend.append("g").attr("transform", "translate(" + 0 + "," + 20 + ")").attr("id", "legend-axis").call(d3.axisBottom(legendScale).tickValues([0, 25, 50, 75, 100]));
 }
+
+/* To do: Learn more about scales */

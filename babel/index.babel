@@ -1,6 +1,3 @@
-// TO DO:
-// Learn how to do a proper legend.
-
 const HEIGHT = 700;
 const WIDTH = 900;
 const BASE_DATA_URL = "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/";
@@ -46,15 +43,15 @@ function ready(error, counties, eduData) {
     .selectAll("path")
     .data(topojson.feature(counties, counties.objects.counties).features)
       .enter().append("path")
-      .attr("fill", (d, i) => chooseAColour(eduMap.get(d.id)))
+      .attr("fill", (d, i) => chooseAColour(eduMap.get(d.id).education))
       .attr("d", path)
       .attr("class", "county")
       .attr("data-fips", (d) => d.id)
-      .attr("data-education", (d) => eduMap.get(d.id))
+      .attr("data-education", (d) => eduMap.get(d.id).education)
   .on('mouseover', (d) => {
     let education = eduMap.get(d.id);
     tooltip.transition().duration(100).style("opacity", 0.9);
-    tooltip.html(`${education}%`);
+    tooltip.html(`${education.education}% \n ${education.areaName}`);
     tooltip.style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 28) + "px");
     tooltip
@@ -73,9 +70,8 @@ leyenda();
 
 function procesarEduData(data){
   data.forEach((d) => {
-    eduMap.set(d.fips, d.bachelorsOrHigher)
-  })
-}
+    eduMap.set(d.fips, {"education": d.bachelorsOrHigher, "areaName": d.area_name})
+})}
 
 function chooseAColour(education){
   // Think of a better/clever way to do this:
@@ -93,7 +89,7 @@ function chooseAColour(education){
 
 function leyenda(){
   
-  const legendScale = d3.scaleLinear().domain([0, 100]).range([0, 100]);
+  const legendScale = d3.scaleLinear().domain([0, 100]).range([0, 120]);
   
   const legend = svg.append("g").attr("id", "legend").attr("transform", "translate(" + 420 + "," + 20 + ")");
 	
@@ -114,5 +110,7 @@ function leyenda(){
 	legend.append("g")
 	  .attr("transform", "translate(" + 0 + "," + 20 + ")")
     .attr("id", "legend-axis")
-    .call(d3.axisBottom(legendScale).tickValues([25, 50, 75, 100]));
+    .call(d3.axisBottom(legendScale).tickValues([0, 25, 50, 75, 100]));
 }
+
+/* To do: Learn more about scales */
